@@ -52,5 +52,26 @@ extension SCNNode {
             addChildNode(child)
         }
     }
+    
+    func showBoundingBox() {
+        let box = SCNBox(
+            width: CGFloat((boundingBox.max.x - boundingBox.min.x) * scale.x),
+            height: CGFloat((boundingBox.max.y - boundingBox.min.y) * scale.y),
+            length: CGFloat((boundingBox.max.z - boundingBox.min.z) * scale.z),
+            chamferRadius: 0
+        )
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.init(red: 0, green: 1, blue: 0, alpha: 0.5)
+        for i in 0...5 {
+            box.insertMaterial(material, at: i)
+        }
+        let boxNode = SCNNode(geometry: box)
+        boxNode.position = SCNVector3(
+            x: (boundingBox.max.x + boundingBox.min.x) * 0.5 * scale.x,
+            y: (boundingBox.max.y + boundingBox.min.y) * 0.5 * scale.y,
+            z: (boundingBox.max.z + boundingBox.min.z) * 0.5 * scale.z
+        )
+        parent?.addChildNode(boxNode)
+    }
 
 }
