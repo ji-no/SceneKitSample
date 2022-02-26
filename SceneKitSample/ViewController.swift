@@ -12,6 +12,8 @@ import SceneKit
 class ViewController: UIViewController {
     @IBOutlet weak var sceneView: SCNView!
     let scene = SCNScene()
+    var cameraNode: SCNNode!
+    var model: USDZNode!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ extension ViewController {
     
     func setUp() {
         sceneView.scene = scene
+        sceneView.delegate = self
 
         setUpLight()
         setUpCamera()
@@ -54,6 +57,7 @@ extension ViewController {
         cameraNode.position = SCNVector3(x: 9, y: 3, z: 9)
         cameraNode.eulerAngles = SCNVector3(0, Float.pi/4, 0)
         sceneView.allowsCameraControl = true
+        self.cameraNode = cameraNode
     }
     
     func setUpPlane() {
@@ -72,8 +76,18 @@ extension ViewController {
         scene.rootNode.addChildNode(toyBiplane)
         
         toyBiplane.showBoundingBox()
-
+        toyBiplane.createSizeText()
+        model = toyBiplane
     }
 
 }
 
+extension ViewController: SCNSceneRendererDelegate {
+
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if let pointOfView = sceneView.pointOfView {
+            model.updateSizeText(cameraPosition: pointOfView.position)
+        }
+    }
+
+}
