@@ -16,6 +16,8 @@
 		3B067FC127CA13A400A8E8E0 /* ToyBiplane.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3B067FC027CA13A400A8E8E0 /* ToyBiplane.usdz */; };
 		3B067FC327CA140200A8E8E0 /* USDZNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B067FC227CA140200A8E8E0 /* USDZNode.swift */; };
 		3B067FC527CA5E5E00A8E8E0 /* SceneKitUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */; };
+		3BCD20AB27CB506900CEA97D /* NodeTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD20AA27CB506800CEA97D /* NodeTechnique.plist */; };
+		3BCD20AD27CB59FA00CEA97D /* NodeRender.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		3B067FC027CA13A400A8E8E0 /* ToyBiplane.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = ToyBiplane.usdz; sourceTree = "<group>"; };
 		3B067FC227CA140200A8E8E0 /* USDZNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USDZNode.swift; sourceTree = "<group>"; };
 		3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitUtils.swift; sourceTree = "<group>"; };
+		3BCD20AA27CB506800CEA97D /* NodeTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NodeTechnique.plist; sourceTree = "<group>"; };
+		3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = NodeRender.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +72,12 @@
 				3B067FAF27CA0BAB00A8E8E0 /* ViewController.swift */,
 				3B067FC227CA140200A8E8E0 /* USDZNode.swift */,
 				3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */,
+				3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */,
 				3B067FB127CA0BAB00A8E8E0 /* Main.storyboard */,
 				3B067FB427CA0BAD00A8E8E0 /* Assets.xcassets */,
 				3B067FB627CA0BAD00A8E8E0 /* LaunchScreen.storyboard */,
 				3B067FB927CA0BAD00A8E8E0 /* Info.plist */,
+				3BCD20AA27CB506800CEA97D /* NodeTechnique.plist */,
 			);
 			path = SceneKitSample;
 			sourceTree = "<group>";
@@ -142,6 +148,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCD20AB27CB506900CEA97D /* NodeTechnique.plist in Resources */,
 				3B067FB827CA0BAD00A8E8E0 /* LaunchScreen.storyboard in Resources */,
 				3B067FB527CA0BAD00A8E8E0 /* Assets.xcassets in Resources */,
 				3B067FC127CA13A400A8E8E0 /* ToyBiplane.usdz in Resources */,
@@ -161,6 +168,7 @@
 				3B067FC327CA140200A8E8E0 /* USDZNode.swift in Sources */,
 				3B067FAC27CA0BAB00A8E8E0 /* AppDelegate.swift in Sources */,
 				3B067FAE27CA0BAB00A8E8E0 /* SceneDelegate.swift in Sources */,
+				3BCD20AD27CB59FA00CEA97D /* NodeRender.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

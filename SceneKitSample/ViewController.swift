@@ -33,6 +33,21 @@ extension ViewController {
         setUpCamera()
         setUpPlane()
         setUpObject()
+        setUpTechnique()
+    }
+
+    func setUpTechnique() {
+        if let path = Bundle.main.path(forResource: "NodeTechnique", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: path)  {
+                let dict2 = dict as! [String : AnyObject]
+                let technique = SCNTechnique(dictionary: dict2)
+
+                // set the glow color to yellow
+                let color = SCNVector3(1.0, 1.0, 0.0)
+                technique?.setValue(NSValue(scnVector3: color), forKeyPath: "glowColorSymbol")
+                sceneView.technique = technique
+            }
+        }
     }
 
     func setUpLight() {
@@ -75,8 +90,9 @@ extension ViewController {
         toyBiplane.position = SCNVector3(x: 0, y: 0, z: 0)
         scene.rootNode.addChildNode(toyBiplane)
         
-        toyBiplane.showBoundingBox()
+        //toyBiplane.showBoundingBox()
         toyBiplane.createSizeText()
+        toyBiplane.setHighlighted()
         model = toyBiplane
     }
 
