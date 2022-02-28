@@ -10,6 +10,7 @@ import SceneKit
 
 class USDZNode: SCNNode {
     var sizeText = NodeSizeText()
+    var outsideEdge = NodeOutsideEdge()
     
     // https://developer.apple.com/jp/augmented-reality/quick-look/
     enum ObjectType: String {
@@ -27,6 +28,7 @@ class USDZNode: SCNNode {
         self.scale = SCNVector3(scale, scale, scale)
         self.name = type.rawValue
         sizeText.targetNode = self
+        outsideEdge.targetNode = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -39,6 +41,14 @@ class USDZNode: SCNNode {
 
     func updateSizeText(cameraPosition: SCNVector3) {
         sizeText.updateSizeText(cameraPosition: cameraPosition)
+    }
+    
+    func createOutsideEdge() {
+        outsideEdge.createEdge()
+    }
+
+    func updateOutsideEdge(cameraPosition: SCNVector3) {
+        outsideEdge.updateEdge(cameraPosition: cameraPosition)
     }
 
 }

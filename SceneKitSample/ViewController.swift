@@ -92,7 +92,8 @@ extension ViewController {
         
         //toyBiplane.showBoundingBox()
         toyBiplane.createSizeText()
-        toyBiplane.setHighlighted()
+        //toyBiplane.setHighlighted()
+        toyBiplane.createOutsideEdge()
         model = toyBiplane
     }
 
@@ -103,6 +104,7 @@ extension ViewController: SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if let pointOfView = sceneView.pointOfView {
             model.updateSizeText(cameraPosition: pointOfView.position)
+            model.updateOutsideEdge(cameraPosition: pointOfView.position)
         }
     }
 
