@@ -66,13 +66,11 @@ class NodeSizeText {
         widthTextNodes = positions.map { pos in
             let textNode = create(text: String.init(format: "%.2f", boundingBoxSize.x), targetNode: targetNode)
             textNode.position = boundingBoxCenter + pos
-            if let child = textNode.childNodes.first {
-                child.position.y = 0
-                if pos.z > 0 {
-                    textNode.position.z += child.boundingBoxCenter.x
-                } else {
-                    textNode.position.z -= child.boundingBoxCenter.x
-                }
+            textNode.position.y += textNode.boundingBoxSize.y * 0.5
+            if pos.z > 0 {
+                textNode.position.z += textNode.boundingBoxSize.x * 0.5
+            } else {
+                textNode.position.z -= textNode.boundingBoxSize.x * 0.5
             }
             return textNode
         }
@@ -98,13 +96,11 @@ class NodeSizeText {
         depthTextNodes = positions.map { pos in
             let textNode = create(text: String.init(format: "%.2f", boundingBoxSize.z), targetNode: targetNode)
             textNode.position = boundingBoxCenter + pos
-            if let child = textNode.childNodes.first {
-                child.position.y = 0
-                if pos.x > 0 {
-                    textNode.position.x += child.boundingBoxCenter.x
-                } else {
-                    textNode.position.x -= child.boundingBoxCenter.x
-                }
+            textNode.position.y += textNode.boundingBoxSize.y * 0.5
+            if pos.x > 0 {
+                textNode.position.x += textNode.boundingBoxSize.x * 0.5
+            } else {
+                textNode.position.x -= textNode.boundingBoxSize.x * 0.5
             }
             return textNode
         }
@@ -140,17 +136,15 @@ class NodeSizeText {
         heightTextNodes = positions.map { pos in
             let textNode = create(text: String.init(format: "%.2f", boundingBoxSize.y), targetNode: targetNode)
             textNode.position = boundingBoxCenter + pos
-            if let child = textNode.childNodes.first {
-                if pos.x > 0 {
-                    textNode.position.x += child.boundingBoxCenter.x / sqrt(2)
-                } else {
-                    textNode.position.x -= child.boundingBoxCenter.x / sqrt(2)
-                }
-                if pos.z > 0 {
-                    textNode.position.z += child.boundingBoxCenter.x / sqrt(2)
-                } else {
-                    textNode.position.z -= child.boundingBoxCenter.x / sqrt(2)
-                }
+            if pos.x > 0 {
+                textNode.position.x += textNode.boundingBoxSize.x * 0.5 / sqrt(2)
+            } else {
+                textNode.position.x -= textNode.boundingBoxSize.x * 0.5 / sqrt(2)
+            }
+            if pos.z > 0 {
+                textNode.position.z += textNode.boundingBoxSize.x * 0.5 / sqrt(2)
+            } else {
+                textNode.position.z -= textNode.boundingBoxSize.x * 0.5 / sqrt(2)
             }
             return textNode
         }
@@ -174,8 +168,16 @@ class NodeSizeText {
             y: -textNode.boundingBoxCenter.y,
             z: -textNode.boundingBoxCenter.z
         )
+        
+        let plane = SCNPlane(width: CGFloat(textNode.boundingBoxSize.x + 0.1), height: CGFloat(textNode.boundingBoxSize.y + 0.1))
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = UIColor.white
+        plane.insertMaterial(planeMaterial, at: 0)
+        let planeNode = SCNNode(geometry: plane)
+        
         let node = SCNNode()
         node.addChildNode(textNode)
+        node.addChildNode(planeNode)
         let billboardConstraint = SCNBillboardConstraint()
         node.constraints = [billboardConstraint]
         node.position = targetNode.position
