@@ -18,6 +18,7 @@
 		3B067FC527CA5E5E00A8E8E0 /* SceneKitUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */; };
 		3BCD20AB27CB506900CEA97D /* NodeTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD20AA27CB506800CEA97D /* NodeTechnique.plist */; };
 		3BCD20AD27CB59FA00CEA97D /* NodeRender.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */; };
+		3BDFEAB627CCFB4700CBBDCE /* NodeSizeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDFEAB527CCFB4700CBBDCE /* NodeSizeText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitUtils.swift; sourceTree = "<group>"; };
 		3BCD20AA27CB506800CEA97D /* NodeTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NodeTechnique.plist; sourceTree = "<group>"; };
 		3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = NodeRender.metal; sourceTree = "<group>"; };
+		3BDFEAB527CCFB4700CBBDCE /* NodeSizeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeSizeText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				3B067FAD27CA0BAB00A8E8E0 /* SceneDelegate.swift */,
 				3B067FAF27CA0BAB00A8E8E0 /* ViewController.swift */,
 				3B067FC227CA140200A8E8E0 /* USDZNode.swift */,
+				3BDFEAB527CCFB4700CBBDCE /* NodeSizeText.swift */,
 				3B067FC427CA5E5E00A8E8E0 /* SceneKitUtils.swift */,
 				3BCD20AC27CB59FA00CEA97D /* NodeRender.metal */,
 				3B067FB127CA0BAB00A8E8E0 /* Main.storyboard */,
@@ -168,6 +171,7 @@
 				3B067FC327CA140200A8E8E0 /* USDZNode.swift in Sources */,
 				3B067FAC27CA0BAB00A8E8E0 /* AppDelegate.swift in Sources */,
 				3B067FAE27CA0BAB00A8E8E0 /* SceneDelegate.swift in Sources */,
+				3BDFEAB627CCFB4700CBBDCE /* NodeSizeText.swift in Sources */,
 				3BCD20AD27CB59FA00CEA97D /* NodeRender.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
