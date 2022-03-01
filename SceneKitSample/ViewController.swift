@@ -90,7 +90,7 @@ extension ViewController {
         toyBiplane.position = SCNVector3(x: 0, y: 0, z: 0)
         scene.rootNode.addChildNode(toyBiplane)
         
-        //toyBiplane.showBoundingBox()
+        toyBiplane.showBoundingBox()
         toyBiplane.createSizeText()
         //toyBiplane.setHighlighted()
         toyBiplane.createOutsideEdge()

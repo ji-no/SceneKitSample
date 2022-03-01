@@ -9,6 +9,7 @@
 import SceneKit
 
 class USDZNode: SCNNode {
+    var modelRoot = SCNNode()
     var sizeText = NodeSizeText()
     var outsideEdge = NodeOutsideEdge()
     
@@ -23,12 +24,13 @@ class USDZNode: SCNNode {
 
     init(type: ObjectType = .ToyBiplane) {
         super.init()
-        loadUsdz(name: type.rawValue)
+        modelRoot.loadUsdz(name: type.rawValue)
         let scale = 0.1
-        self.scale = SCNVector3(scale, scale, scale)
+        modelRoot.scale = SCNVector3(scale, scale, scale)
+        addChildNode(modelRoot)
         self.name = type.rawValue
-        sizeText.targetNode = self
-        outsideEdge.targetNode = self
+        sizeText.targetNode = modelRoot
+        outsideEdge.targetNode = modelRoot
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,6 +51,23 @@ class USDZNode: SCNNode {
 
     func updateOutsideEdge(cameraPosition: SCNVector3) {
         outsideEdge.updateEdge(cameraPosition: cameraPosition)
+    }
+    
+    func showBoundingBox() {
+        let box = SCNBox(
+            width: CGFloat(modelRoot.boundingBoxSize.x),
+            height: CGFloat(modelRoot.boundingBoxSize.y),
+            length: CGFloat(modelRoot.boundingBoxSize.z),
+            chamferRadius: 0
+        )
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.init(red: 0, green: 1, blue: 0, alpha: 0.5)
+        for i in 0...5 {
+            box.insertMaterial(material, at: i)
+        }
+        let boxNode = SCNNode(geometry: box)
+        boxNode.position = modelRoot.boundingBoxCenter
+        addChildNode(boxNode)
     }
 
 }
@@ -87,23 +106,6 @@ extension SCNNode {
             y: (boundingBox.max.y + boundingBox.min.y) * 0.5 * scale.y,
             z: (boundingBox.max.z + boundingBox.min.z) * 0.5 * scale.z
         )
-    }
-    
-    func showBoundingBox() {
-        let box = SCNBox(
-            width: CGFloat(boundingBoxSize.x),
-            height: CGFloat(boundingBoxSize.y),
-            length: CGFloat(boundingBoxSize.z),
-            chamferRadius: 0
-        )
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.init(red: 0, green: 1, blue: 0, alpha: 0.5)
-        for i in 0...5 {
-            box.insertMaterial(material, at: i)
-        }
-        let boxNode = SCNNode(geometry: box)
-        boxNode.position = boundingBoxCenter
-        parent?.addChildNode(boxNode)
     }
 
     func setHighlighted( _ highlighted : Bool = true, _ highlightedBitMask : Int = 2 ) {
