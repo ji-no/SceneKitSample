@@ -11,9 +11,23 @@ import SceneKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var resetButton: UIButton!
     let scene = SCNScene()
     var cameraNode: SCNNode!
     var model: USDZNode!
+    
+    struct CameraPosition: Equatable {
+        var position: SCNVector3
+        var eulerAngles: SCNVector3
+        var fieldOfView: CGFloat?
+
+        static func == (lhs: ViewController.CameraPosition, rhs: ViewController.CameraPosition) -> Bool {
+            return lhs.position == rhs.position && lhs.eulerAngles == rhs.eulerAngles && lhs.fieldOfView == rhs.fieldOfView
+        }
+    }
+    var prevCameraPosition: CameraPosition? = nil
+    var isAnimating: Bool = false
+    var isSwiping: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +35,29 @@ class ViewController: UIViewController {
         setUp()
     }
 
+    @IBAction func onTappedResetButton(_ sender: Any) {
+//        sceneView.pointOfView?.position = cameraNode.position
+//        sceneView.pointOfView?.eulerAngles = cameraNode.eulerAngles
+
+        sceneView.pointOfView?.removeAllActions()
+        
+        let duration: CGFloat = 0.5
+        let move = SCNAction.move(to: cameraNode.position, duration: duration)
+        let rotate = SCNAction.rotateTo(
+            x: CGFloat(cameraNode.eulerAngles.x),
+            y: CGFloat(cameraNode.eulerAngles.y),
+            z: CGFloat(cameraNode.eulerAngles.z),
+            duration: duration
+        )
+        let startZoom = sceneView.pointOfView?.camera?.fieldOfView ?? 0
+        let endZoom = cameraNode.camera?.fieldOfView ?? 0
+        let zoom = SCNAction.customAction(duration: duration) { (node, elapsedTime) in
+            node.camera?.fieldOfView = startZoom + (endZoom - startZoom) * (elapsedTime / duration)
+        }
+        let action = SCNAction.group([move, rotate, zoom])
+        action.timingMode = .easeOut
+        sceneView.pointOfView?.runAction(action)
+    }
 }
 
 extension ViewController {
@@ -34,6 +71,7 @@ extension ViewController {
         setUpPlane()
         setUpObject()
         setUpTechnique()
+        setUpGesture()
     }
 
     func setUpTechnique() {
@@ -89,7 +127,6 @@ extension ViewController {
         let toyBiplane = USDZNode(type: .ToyBiplane)
         toyBiplane.position = SCNVector3(x: 0, y: 0, z: 0)
         scene.rootNode.addChildNode(toyBiplane)
-        
         toyBiplane.showBoundingBox()
         toyBiplane.createSizeText()
         //toyBiplane.setHighlighted()
@@ -97,6 +134,20 @@ extension ViewController {
         model = toyBiplane
     }
 
+    func setUpGesture() {
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onSwipeScene(_:)))
+        panGestureRecognizer.delegate = self
+        sceneView.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc private func onSwipeScene(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            isSwiping = true
+        default:
+            isSwiping = false
+        }
+    }
 }
 
 extension ViewController: SCNSceneRendererDelegate {
@@ -105,7 +156,29 @@ extension ViewController: SCNSceneRendererDelegate {
         if let pointOfView = sceneView.pointOfView {
             model.updateSizeText(cameraPosition: pointOfView.position)
             model.updateOutsideEdge(cameraPosition: pointOfView.position)
+            
+            let cameraPosition = CameraPosition(
+                position: pointOfView.position,
+                eulerAngles: pointOfView.eulerAngles,
+                fieldOfView: pointOfView.camera?.fieldOfView
+            )
+            let isAnimating = isSwiping || prevCameraPosition != cameraPosition
+            if self.isAnimating != isAnimating {
+                self.isAnimating = isAnimating
+                DispatchQueue.main.async { [weak self] in
+                    self?.resetButton.isEnabled = !isAnimating
+                }
+            }
+            prevCameraPosition = cameraPosition
         }
     }
 
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
 }

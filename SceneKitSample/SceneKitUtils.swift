@@ -35,3 +35,9 @@ func /= (left: inout SCNVector3, right: Float) {
 func distance(_ a: SCNVector3, _ b: SCNVector3) -> Float {
     return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2))
 }
+
+extension SCNVector3: Equatable {
+    public static func == (lhs: SCNVector3, rhs: SCNVector3) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
+    }
+}

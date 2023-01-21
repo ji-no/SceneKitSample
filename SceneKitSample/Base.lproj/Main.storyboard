@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,17 +21,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                             </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SK9-zB-is4">
+                                <rect key="frame" x="331.5" y="812" width="67.5" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                                <connections>
+                                    <action selector="onTappedResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3FF-hg-Vl7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SK9-zB-is4" secondAttribute="trailing" constant="15" id="9AI-Fu-wUg"/>
                             <constraint firstAttribute="trailing" secondItem="yJf-3J-ADo" secondAttribute="trailing" id="XP7-xz-ZVl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SK9-zB-is4" secondAttribute="bottom" constant="15" id="aKS-kJ-gdJ"/>
                             <constraint firstAttribute="bottom" secondItem="yJf-3J-ADo" secondAttribute="bottom" id="gJU-XX-AU0"/>
                             <constraint firstItem="yJf-3J-ADo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ndN-aC-6zg"/>
                             <constraint firstItem="yJf-3J-ADo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ytY-K7-vfv"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="resetButton" destination="SK9-zB-is4" id="pz7-fZ-tc7"/>
                         <outlet property="sceneView" destination="yJf-3J-ADo" id="KSw-SP-hmo"/>
                     </connections>
                 </viewController>
