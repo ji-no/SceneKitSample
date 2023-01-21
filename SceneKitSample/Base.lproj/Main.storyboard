@@ -29,6 +29,13 @@
                                     <action selector="onTappedResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3FF-hg-Vl7"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point" translatesAutoresizingMaskIntoConstraints="NO" id="lkl-8y-dih">
+                                <rect key="frame" x="192" y="433" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="3yB-fu-6qC"/>
+                                    <constraint firstAttribute="width" secondItem="lkl-8y-dih" secondAttribute="height" multiplier="1:1" id="e5Y-Bd-mrr"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -36,12 +43,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SK9-zB-is4" secondAttribute="trailing" constant="15" id="9AI-Fu-wUg"/>
                             <constraint firstAttribute="trailing" secondItem="yJf-3J-ADo" secondAttribute="trailing" id="XP7-xz-ZVl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SK9-zB-is4" secondAttribute="bottom" constant="15" id="aKS-kJ-gdJ"/>
+                            <constraint firstItem="lkl-8y-dih" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dSb-kb-v82"/>
                             <constraint firstAttribute="bottom" secondItem="yJf-3J-ADo" secondAttribute="bottom" id="gJU-XX-AU0"/>
                             <constraint firstItem="yJf-3J-ADo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ndN-aC-6zg"/>
                             <constraint firstItem="yJf-3J-ADo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ytY-K7-vfv"/>
+                            <constraint firstItem="lkl-8y-dih" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zVc-hB-rTA"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="pointImageView" destination="lkl-8y-dih" id="MER-I4-U3R"/>
                         <outlet property="resetButton" destination="SK9-zB-is4" id="pz7-fZ-tc7"/>
                         <outlet property="sceneView" destination="yJf-3J-ADo" id="KSw-SP-hmo"/>
                     </connections>
@@ -52,6 +62,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="point" width="500" height="623"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
